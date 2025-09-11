@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db:
+    image: docker.arvancloud.ir/postgres
+    container_name: azure_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: azureuser
+      POSTGRES_PASSWORD: azurepass
+      POSTGRES_DB: azuredata
+    ports:
+      - "5434:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+      - ./data:/data
+    tmpfs:
+      - /mnt/ramdisk:rw,size=20g,uid=999,gid=999    # <-- tmpfs mount for Postgres temp files
+
+volumes:
+  pg_data:
