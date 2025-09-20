@@ -502,6 +502,7 @@ HAVING AVG(fdd.p99 - fdd.p75) > 100  -- At least 100ms difference
 ORDER BY volatility_ratio DESC;
 
 
+-- query 10
 WITH memory_trend AS (
     SELECT 
         hash_app,
